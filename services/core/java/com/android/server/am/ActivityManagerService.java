@@ -1306,12 +1306,18 @@ public final class ActivityManagerService extends ActivityManagerNative
             switch (msg.what) {
             case SHOW_ERROR_MSG: {
                 HashMap<String, Object> data = (HashMap<String, Object>) msg.obj;
-                boolean showBackground = Settings.Secure.getInt(mContext.getContentResolver(),
-                        Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0;
+                //boolean showBackground = Settings.Secure.getInt(mContext.getContentResolver(),
+                //        Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0;
                 synchronized (ActivityManagerService.this) {
                     ProcessRecord proc = (ProcessRecord)data.get("app");
                     AppErrorResult res = (AppErrorResult) data.get("result");
-                    if (proc != null && proc.crashDialog != null) {
+
+                    // Always force close app
+                    if (res != null) {
+                        res.set(0);
+                    }
+
+                    /*if (proc != null && proc.crashDialog != null) {
                         Slog.e(TAG, "App already has crash dialog: " + proc);
                         if (res != null) {
                             res.set(0);
@@ -1342,7 +1348,7 @@ public final class ActivityManagerService extends ActivityManagerNative
                         if (res != null) {
                             res.set(0);
                         }
-                    }
+                    }*/
                 }
 
                 ensureBootCompleted();
