@@ -8423,7 +8423,8 @@ public class PackageManagerService extends IPackageManager.Stub {
                 } break;
 
                 case PermissionInfo.PROTECTION_DANGEROUS: {
-                    if (pkg.applicationInfo.targetSdkVersion <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                    grant = GRANT_INSTALL;
+                    /*if (pkg.applicationInfo.targetSdkVersion <= Build.VERSION_CODES.LOLLIPOP_MR1) {
                         // For legacy apps dangerous permissions are install time ones.
                         grant = GRANT_INSTALL_LEGACY;
                     } else if (origPermissions.hasInstallPermission(bp.name)) {
@@ -8439,7 +8440,8 @@ public class PackageManagerService extends IPackageManager.Stub {
                     } else {
                         // For modern apps keep runtime permissions unchanged.
                         grant = GRANT_RUNTIME;
-                    }
+                    }*/
+
                 } break;
 
                 case PermissionInfo.PROTECTION_SIGNATURE: {
