@@ -319,7 +319,8 @@ public class NavigationBarView extends LinearLayout {
         mDisabledFlags = disabledFlags;
 
         final boolean disableHome = ((disabledFlags & View.STATUS_BAR_DISABLE_HOME) != 0);
-        boolean disableRecent = ((disabledFlags & View.STATUS_BAR_DISABLE_RECENT) != 0);
+        //boolean disableRecent = ((disabledFlags & View.STATUS_BAR_DISABLE_RECENT) != 0);
+        boolean disableRecent = true;
         final boolean disableBack = ((disabledFlags & View.STATUS_BAR_DISABLE_BACK) != 0)
                 && ((mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) == 0);
         final boolean disableSearch = ((disabledFlags & View.STATUS_BAR_DISABLE_SEARCH) != 0);
@@ -345,7 +346,8 @@ public class NavigationBarView extends LinearLayout {
 
         getBackButton()   .setVisibility(disableBack       ? View.INVISIBLE : View.VISIBLE);
         getHomeButton()   .setVisibility(disableHome       ? View.INVISIBLE : View.VISIBLE);
-        getRecentsButton().setVisibility(disableRecent     ? View.INVISIBLE : View.VISIBLE);
+        //getRecentsButton().setVisibility(disableRecent     ? View.INVISIBLE : View.VISIBLE);
+        getRecentsButton().setVisibility(View.INVISIBLE);
     }
 
     private boolean inLockTask() {
