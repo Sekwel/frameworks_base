@@ -1224,7 +1224,7 @@ public class NotificationManagerService extends SystemService {
         public void setPackagePeekable(String pkg, int uid, boolean peekable) {
             checkCallerIsSystem();
 
-            mRankingHelper.setPackagePeekable(pkg, uid, peekable);
+            mRankingHelper.setPackagePeekable(pkg, uid, false);
         }
 
         @Override

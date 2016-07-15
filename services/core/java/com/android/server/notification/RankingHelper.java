@@ -53,7 +53,7 @@ public class RankingHelper implements RankingConfig {
     private static final String ATT_VISIBILITY = "visibility";
 
     private static final int DEFAULT_PRIORITY = Notification.PRIORITY_DEFAULT;
-    private static final boolean DEFAULT_PEEKABLE = true;
+    private static final boolean DEFAULT_PEEKABLE = false;
     private static final int DEFAULT_VISIBILITY =
             NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE;
 
