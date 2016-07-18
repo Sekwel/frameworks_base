@@ -28,6 +28,7 @@ import android.app.PendingIntent;
 import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentCallbacks2;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -1098,13 +1099,29 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     private final View.OnTouchListener mHomeActionListener = new View.OnTouchListener() {
         public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                    awakenDreams();
-                    break;
+            ActivityManager am = (ActivityManager) v.getContext().getSystemService(Context.ACTIVITY_SERVICE);
+            List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+            if (tasks != null && !tasks.isEmpty()) {
+                ComponentName topActivity = tasks.get(0).topActivity;
+                System.out.println("Home button detected. Top package name: " + topActivity.getPackageName());
+                if (!topActivity.getPackageName().equals("com.sekwel.homelauncher")) {
+                    System.out.println("Package is not Sekwel");
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            awakenDreams();
+                            break;
+                    }
+                    return false;
+                } else {
+                    System.out.println("Package is Sekwel. DO NOTHING");
+                    if (mNavigationBarView != null) {
+                        mNavigationBarView.abortCurrentGesture();
+                    }
+                    return true;
+                }
             }
-            return false;
+            return true;
         }
     };
 
@@ -1128,7 +1145,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mNavigationBarView.getBackButton().setLongClickable(true);
         mNavigationBarView.getBackButton().setOnLongClickListener(mLongPressBackRecentsListener);
         mNavigationBarView.getHomeButton().setOnTouchListener(mHomeActionListener);
-        mNavigationBarView.getHomeButton().setOnLongClickListener(mLongPressHomeListener);
+        //mNavigationBarView.getHomeButton().setOnLongClickListener(mLongPressHomeListener);
         mAssistManager.onConfigurationChanged();
     }
 
