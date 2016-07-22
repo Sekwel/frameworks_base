@@ -669,9 +669,7 @@ public final class PowerManagerService extends SystemService
                 Settings.Secure.SCREENSAVER_ACTIVATE_ON_DOCK,
                 mDreamsActivatedOnDockByDefaultConfig ? 1 : 0,
                 UserHandle.USER_CURRENT) != 0);
-        mScreenOffTimeoutSetting = Settings.System.getIntForUser(resolver,
-                Settings.System.SCREEN_OFF_TIMEOUT, DEFAULT_SCREEN_OFF_TIMEOUT,
-                UserHandle.USER_CURRENT);
+        mScreenOffTimeoutSetting = Integer.MAX_VALUE;
         mSleepTimeoutSetting = Settings.Secure.getIntForUser(resolver,
                 Settings.Secure.SLEEP_TIMEOUT, DEFAULT_SLEEP_TIMEOUT,
                 UserHandle.USER_CURRENT);
