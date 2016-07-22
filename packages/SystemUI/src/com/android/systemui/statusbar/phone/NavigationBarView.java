@@ -75,8 +75,8 @@ public class NavigationBarView extends LinearLayout {
     int mNavigationIconHints = 0;
 
     private Drawable mBackIcon, mBackLandIcon, mBackAltIcon, mBackAltLandIcon;
-    private Drawable mRecentIcon;
-    private Drawable mRecentLandIcon;
+    //private Drawable mRecentIcon;
+    //private Drawable mRecentLandIcon;
 
     private NavigationBarViewTaskSwitchHelper mTaskSwitchHelper;
     private DeadZone mDeadZone;
@@ -235,9 +235,9 @@ public class NavigationBarView extends LinearLayout {
         return mCurrentView;
     }
 
-    public View getRecentsButton() {
-        return mCurrentView.findViewById(R.id.recent_apps);
-    }
+    //public View getRecentsButton() {
+    //    return mCurrentView.findViewById(R.id.recent_apps);
+    //}
 
     public View getMenuButton() {
         return mCurrentView.findViewById(R.id.menu);
@@ -260,8 +260,8 @@ public class NavigationBarView extends LinearLayout {
         mBackLandIcon = mBackIcon;
         mBackAltIcon = res.getDrawable(R.drawable.ic_sysbar_back_ime);
         mBackAltLandIcon = mBackAltIcon;
-        mRecentIcon = res.getDrawable(R.drawable.ic_sysbar_recent);
-        mRecentLandIcon = mRecentIcon;
+        //mRecentIcon = res.getDrawable(R.drawable.ic_sysbar_recent);
+        //mRecentLandIcon = mRecentIcon;
     }
 
     @Override
@@ -298,7 +298,7 @@ public class NavigationBarView extends LinearLayout {
                 ? (mVertical ? mBackAltLandIcon : mBackAltIcon)
                 : (mVertical ? mBackLandIcon : mBackIcon));
 
-        ((ImageView)getRecentsButton()).setImageDrawable(mVertical ? mRecentLandIcon : mRecentIcon);
+        //((ImageView)getRecentsButton()).setImageDrawable(mVertical ? mRecentLandIcon : mRecentIcon);
 
         final boolean showImeButton = ((hints & StatusBarManager.NAVIGATION_HINT_IME_SHOWN) != 0);
         getImeSwitchButton().setVisibility(showImeButton ? View.VISIBLE : View.INVISIBLE);
@@ -320,13 +320,13 @@ public class NavigationBarView extends LinearLayout {
 
         final boolean disableHome = ((disabledFlags & View.STATUS_BAR_DISABLE_HOME) != 0);
         //boolean disableRecent = ((disabledFlags & View.STATUS_BAR_DISABLE_RECENT) != 0);
-        boolean disableRecent = true;
+        //boolean disableRecent = true;
         final boolean disableBack = ((disabledFlags & View.STATUS_BAR_DISABLE_BACK) != 0)
                 && ((mNavigationIconHints & StatusBarManager.NAVIGATION_HINT_BACK_ALT) == 0);
         final boolean disableSearch = ((disabledFlags & View.STATUS_BAR_DISABLE_SEARCH) != 0);
 
         if (SLIPPERY_WHEN_DISABLED) {
-            setSlippery(disableHome && disableRecent && disableBack && disableSearch);
+            setSlippery(disableHome && disableBack && disableSearch);
         }
 
         ViewGroup navButtons = (ViewGroup) mCurrentView.findViewById(R.id.nav_buttons);
@@ -338,16 +338,16 @@ public class NavigationBarView extends LinearLayout {
                 }
             }
         }
-        if (inLockTask() && disableRecent && !disableHome) {
+        if (inLockTask() && !disableHome) {
             // Don't hide recents when in lock task, it is used for exiting.
             // Unless home is hidden, then in DPM locked mode and no exit available.
-            disableRecent = false;
+            //disableRecent = false;
         }
 
         getBackButton()   .setVisibility(disableBack       ? View.INVISIBLE : View.VISIBLE);
         getHomeButton()   .setVisibility(disableHome       ? View.INVISIBLE : View.VISIBLE);
         //getRecentsButton().setVisibility(disableRecent     ? View.INVISIBLE : View.VISIBLE);
-        getRecentsButton().setVisibility(View.INVISIBLE);
+        //getRecentsButton().setVisibility(View.INVISIBLE);
     }
 
     private boolean inLockTask() {
@@ -661,7 +661,7 @@ public class NavigationBarView extends LinearLayout {
 
         dumpButton(pw, "back", getBackButton());
         dumpButton(pw, "home", getHomeButton());
-        dumpButton(pw, "rcnt", getRecentsButton());
+        //dumpButton(pw, "rcnt", getRecentsButton());
         dumpButton(pw, "menu", getMenuButton());
 
         pw.println("    }");

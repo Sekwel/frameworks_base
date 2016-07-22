@@ -1063,12 +1063,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         return mNaturalBarHeight;
     }
 
-    private View.OnClickListener mRecentsClickListener = new View.OnClickListener() {
+    /*private View.OnClickListener mRecentsClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             awakenDreams();
             toggleRecentApps();
         }
-    };
+    };*/
 
     private long mLastLockToAppLongPress;
     private View.OnLongClickListener mLongPressBackRecentsListener =
@@ -1080,7 +1080,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
     };
 
-    private final View.OnLongClickListener mLongPressHomeListener
+    /*private final View.OnLongClickListener mLongPressHomeListener
             = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
@@ -1088,14 +1088,14 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 return false;
             }
             MetricsLogger.action(mContext, MetricsLogger.ACTION_ASSIST_LONG_PRESS);
-            mAssistManager.startAssist(new Bundle() /* args */);
+            mAssistManager.startAssist(new Bundle());
             awakenDreams();
             if (mNavigationBarView != null) {
                 mNavigationBarView.abortCurrentGesture();
             }
             return true;
         }
-    };
+    };*/
 
     private final View.OnTouchListener mHomeActionListener = new View.OnTouchListener() {
         public boolean onTouch(View v, MotionEvent event) {
@@ -4021,8 +4021,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     activityManager.stopLockTaskModeOnCurrent();
                     // When exiting refresh disabled flags.
                     mNavigationBarView.setDisabledFlags(mDisabled1, true);
-                } else if ((v.getId() == R.id.back)
-                        && !mNavigationBarView.getRecentsButton().isPressed()) {
+                } else if ((v.getId() == R.id.back)) {
                     // If we aren't pressing recents right now then they presses
                     // won't be together, so send the standard long-press action.
                     sendBackLongPress = true;
