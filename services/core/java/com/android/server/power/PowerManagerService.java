@@ -670,11 +670,8 @@ public final class PowerManagerService extends SystemService
                 mDreamsActivatedOnDockByDefaultConfig ? 1 : 0,
                 UserHandle.USER_CURRENT) != 0);
         mScreenOffTimeoutSetting = Integer.MAX_VALUE;
-        mSleepTimeoutSetting = Settings.Secure.getIntForUser(resolver,
-                Settings.Secure.SLEEP_TIMEOUT, DEFAULT_SLEEP_TIMEOUT,
-                UserHandle.USER_CURRENT);
-        mStayOnWhilePluggedInSetting = Settings.Global.getInt(resolver,
-                Settings.Global.STAY_ON_WHILE_PLUGGED_IN, BatteryManager.BATTERY_PLUGGED_AC);
+        mSleepTimeoutSetting = Integer.MAX_VALUE;
+        mStayOnWhilePluggedInSetting = 1;
         mTheaterModeEnabled = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.THEATER_MODE_ON, 0) == 1;
 
